@@ -47,11 +47,13 @@ exports.userLogin = function (request, response) {
         };
 
         createAuthentication(response, userCopy);
-
         /*
          * The query has been successfully made!
          */
-        response.status(200).send({ username });
+        response.status(200).send({
+          username: result.username,
+          following: result.following,
+        });
       }
     })
     .catch(function (error) {
