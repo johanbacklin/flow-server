@@ -12,5 +12,3 @@ server.use(
     credentials: true,
   })
 );
-
-server.listen(5050);
