@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "tests": "jest"
+    "test": "jest"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
