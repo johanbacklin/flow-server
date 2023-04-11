@@ -4,14 +4,6 @@ const {
 } = require("../controllers/authenticationRoute/userRegister");
 
 const { userLogin } = require("../controllers/authenticationRoute/userLogin");
-const { userLogout } = require("../controllers/authenticationRoute/userLogout");
-const {
-  checkAuthentication,
-} = require("../controllers/middleware/checkAuthentication");
-const { userDelete } = require("../controllers/authenticationRoute/userDelete");
-const {
-  userEditPassword,
-} = require("../controllers/authenticationRoute/userEditPassword");
 
 const authenticationRoute = express.Router();
 
