@@ -17,6 +17,6 @@ jobs:
         with:
           node-version: '18.x'
 
-       - run: cd server/ && npm i
+      - run: cd server
+      - run: npm i
       - run: npm test
-cd
