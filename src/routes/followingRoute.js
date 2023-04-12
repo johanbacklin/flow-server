@@ -8,10 +8,10 @@ const followingRoute = express.Router();
  * This route makes it possible for users to follow other users.
  */
 
-followingRoute.post("/:userId/follow", followUser);
+followingRoute.post("/follow", followUser);
 /*
  * This route makes it possible for users to unFollow other users.
  */
-followingRoute.post("/:userId/unfollow", unFollowUser);
+followingRoute.post("/unFollow", unFollowUser);
 
 exports.followingRoute = followingRoute;
