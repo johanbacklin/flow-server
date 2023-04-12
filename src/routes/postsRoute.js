@@ -1,10 +1,10 @@
 const express = require("express");
+const {
+  getFollowingPosts,
+} = require("../controllers/postsRoute/getFollowingPosts");
 
 const postsRoute = express.Router();
 
-postsRoute.get("/",(req,res)=>{
-    res.status(200).send('Not implemented yet')
-})
+postsRoute.get("/getFollowingPosts", getFollowingPosts);
 
-
-exports.postsRoute= postsRoute;
+exports.postsRoute = postsRoute;
