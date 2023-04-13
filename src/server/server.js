@@ -17,6 +17,6 @@ server.use(
 
 server.use("/authentication", authenticationRoute);
 
-server.use("/followingRoute", followingRoute);
+server.use("/following", followingRoute);
 
 exports.server = server;
