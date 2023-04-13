@@ -2,6 +2,10 @@ const express = require("express");
 const server = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+
+//middleware
+const { checkAuthentication } = require("../controllers/middleware/checkAuthentication");
+
 //Routes
 const { authenticationRoute } = require("../routes/authenticationRoute");
 const { followingRoute } = require("../routes/followingRoute");
