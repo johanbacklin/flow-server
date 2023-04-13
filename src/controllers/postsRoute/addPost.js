@@ -19,7 +19,6 @@ exports.addPost = function (req, res) {
     }
     db.posts.insertOne(newPost)
         .then(result => {
-            console.log(result)
             if(result.insertedId){
             res.status(200).send('Post inserted')
             }else{
