@@ -16,21 +16,19 @@ exports.addPost = function (req, res) {
         likes: [],
         comments: [],
         $setOnInsert: { creation: new Date() }
-        //creation:new Date(<integer>)
     }
     db.posts.insertOne(newPost)
         .then(result => {
             console.log(result)
-        //    if(result.insertedID)
-            res.status(200).send('reached addPost')
+            if(result.insertedId){
+            res.status(200).send('Post inserted')
+            }else{
+                throw new Error('Could not insert post')
+            }
         })
         .catch(error=>{
             response.status(500).send('Ooops, something went wrong');
             return
         })
-
-
-    
 }
 
-//posts (postText, username, creation - date?), likes[], comment [(commentTex, username, creation - date)]
