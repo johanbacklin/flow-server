@@ -5,6 +5,6 @@ const {
 
 const postsRoute = express.Router();
 
-postsRoute.get("/getFollowingPosts", getFollowingPosts);
+postsRoute.get("/following", getFollowingPosts);
 
 exports.postsRoute = postsRoute;
