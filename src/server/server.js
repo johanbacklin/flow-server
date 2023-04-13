@@ -4,11 +4,13 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 //middleware
-const { checkAuthentication } = require("../controllers/middleware/checkAuthentication");
-
+const {
+  checkAuthentication,
+} = require("../controllers/middleware/checkAuthentication");
 
 //Routes
 const { authenticationRoute } = require("../routes/authenticationRoute");
+const { followingRoute } = require("../routes/followingRoute");
 const { postsRoute } = require("../routes/postsRoute");
 
 server.use(express.json());
@@ -22,6 +24,7 @@ server.use(
 );
 
 server.use("/authentication", authenticationRoute);
-server.use("/posts",checkAuthentication, postsRoute);
+
+server.use("/following", checkAuthentication, followingRoute);
 
 exports.server = server;
