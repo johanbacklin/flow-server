@@ -2,8 +2,10 @@ const express = require("express");
 const server = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+//Routes
 const { authenticationRoute } = require("../routes/authenticationRoute");
 const { followingRoute } = require("../routes/followingRoute");
+const {postsRoute}=require("../routes/postsRoute")
 
 server.use(express.json());
 server.use(cookieParser());
@@ -16,7 +18,7 @@ server.use(
 );
 
 server.use("/authentication", authenticationRoute);
-
+server.use("/posts", postsRoute);
 server.use("/following", followingRoute);
 
 exports.server = server;
