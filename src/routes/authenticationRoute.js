@@ -24,6 +24,6 @@ authenticationRoute.post("/login", userLogin);
  */
 authenticationRoute.post("/register", userRegister);
 
-authenticationRoute.get("/users", checkAuthentication, getAllUsers);
+authenticationRoute.get("/users", getAllUsers);
 
 exports.authenticationRoute = authenticationRoute;
