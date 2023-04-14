@@ -1,23 +1,18 @@
 const request = require("supertest");
 const { server } = require("../../../src/server/server");
-const secret = process.env.SECRET;
+const { db } = require("../../../src/database/database");
+
+beforeAll(async function () {
+  await db.connect();
+});
+
+afterAll(async function () {
+  await db.disconnect();
+});
 
 describe("Testing postGet endpoint", function () {
-  test("GET /post/:username should return 401 if bad params", async function () {
-    const response = await request(server).get("/posts/12");
+  test("GET /posts/:username should return 401 if no cookie exists", async function () {
+    const response = await request(server).get("/posts/test");
     expect(response.status).toBe(401);
   });
-
-  /*
-   * Nedan test funkar inte än, måste kolla upp kopplingen till databasen varför den delen inte funkar
-   * och hur man kan koppla dit en cookie.
-   */
-  /*
-  test("GET /post/:username should return 401 if bad params", async function () {
-    const response = await request(server)
-      .get("/posts/12")
-      .set("Cookie", [`authenticationToken=${secret}`]);
-    expect(response.status).toBe(400);
-  });
-*/
 });
