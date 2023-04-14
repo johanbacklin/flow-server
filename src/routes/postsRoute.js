@@ -1,7 +1,9 @@
 const express = require("express");
 
+
 //Controllers
 const { addPost } = require("../controllers/postsRoute/addPost");
+const { deletePost } = require("../controllers/postsRoute/deletePost");
 const {
   getFollowingPosts,
 } = require("../controllers/postsRoute/getFollowingPosts");
@@ -14,5 +16,7 @@ postsRoute.get("/following", getFollowingPosts);
 postsRoute.post("/add", addPost);
 
 postsRoute.get("/:username", postGet);
+
+postsRoute.delete("/delete", deletePost);
 
 exports.postsRoute = postsRoute;
