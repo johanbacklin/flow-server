@@ -13,6 +13,6 @@ postsRoute.get("/following", getFollowingPosts);
 
 postsRoute.post("/add", addPost);
 
-postsRoute.get("/get/:username", postGet);
+postsRoute.get("/:username", postGet);
 
 exports.postsRoute = postsRoute;
