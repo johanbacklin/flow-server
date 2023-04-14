@@ -9,13 +9,12 @@ exports.addPost = function (req, res) {
         return;
     }
     const { postText } = validatedBody.value;
-
     const newPost = {
-        username: req.loggedInUser,
+        username: req.loggedInUser.username,
         postText,
         likes: [],
         comments: [],
-        $setOnInsert: { creation: new Date() }
+         creation: new Date()
     }
     db.posts.insertOne(newPost)
         .then(result => {
