@@ -1,5 +1,4 @@
 const { db } = require("../../database/database");
-require("dotenv").config();
 const { validateFollow } = require("../validations/validateFollow");
 const { ObjectId } = require("mongodb");
 
