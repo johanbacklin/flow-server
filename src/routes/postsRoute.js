@@ -1,19 +1,18 @@
 const express = require("express");
 
-//Middlewares
-const{checkAuthentication }=require("../controllers/middleware/checkAuthentication")
 //Controllers
-const {addPost}=require("../controllers/postsRoute/addPost")
+const { addPost } = require("../controllers/postsRoute/addPost");
 const {
   getFollowingPosts,
 } = require("../controllers/postsRoute/getFollowingPosts");
+const { postGet } = require("../controllers/postsRoute/postGet");
 
 const postsRoute = express.Router();
 
-postsRoute.use(checkAuthentication )
-
 postsRoute.get("/following", getFollowingPosts);
-postsRoute.post('/add', addPost)
 
-exports.postsRoute= postsRoute;
+postsRoute.post("/add", addPost);
 
+postsRoute.get("/:username", postGet);
+
+exports.postsRoute = postsRoute;
