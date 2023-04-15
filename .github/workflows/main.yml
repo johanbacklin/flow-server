@@ -16,5 +16,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
+        env:
+          SECRET: ${{secrets.SECRET}}
+          DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
       - run: npm i
       - run: npm run test
