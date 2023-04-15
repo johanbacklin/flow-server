@@ -29,7 +29,6 @@ exports.followUser = async function (req, res) {
         res.status(200).json("User has been followed");
       }
     } catch (err) {
-      console.error(err);
       return res.status(500).json(err);
     }
   } else {
