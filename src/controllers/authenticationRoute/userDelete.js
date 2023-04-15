@@ -1,13 +1,12 @@
-const { ObjectId } = require("mongodb");
 const { removeAuthentication } = require("../middleware/removeAuthentication");
-const { validateIdUsername } = require("../validations/validateIdUsername");
 const { db } = require("../../database/database");
+const { validateUsername } = require("../validations/validateUsername");
 
 exports.userDelete = function (request, response) {
   /*
    * This validates the request body that the user has inputted
    */
-  const validateBody = validateIdUsername(request.body);
+  const validateBody = validateUsername(request.body);
 
   if (validateBody.error) {
     response.status(400).send(validateBody.error.details[0].message);
@@ -17,12 +16,11 @@ exports.userDelete = function (request, response) {
   /*
    * This obtains the users current data from the validated result.
    */
-  const { id, username } = validateBody.value;
+  const { username } = validateBody.value;
 
   const currentUsername = request.loggedInUser.username;
-  const currentUserID = request.loggedInUser.id;
 
-  if (id === currentUserID && username === currentUsername) {
+  if (username === currentUsername) {
     /*
      * If the user wish to delete their account, the following query will be made.
      */
