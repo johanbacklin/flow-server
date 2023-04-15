@@ -27,7 +27,21 @@ exports.userDelete = function (request, response) {
      * If the user wish to delete their account, the following query will be made.
      */
     db.users
-      .deleteOne({ _id: new ObjectId(id), username: username })
+      .bulkWrite([
+        {
+          updateMany: {
+            filter: { following: username },
+            update: { $pull: { following: username } },
+          },
+        },
+        {
+          updateMany: {
+            filter: { followers: username },
+            update: { $pull: { followers: username } },
+          },
+        },
+        { deleteOne: { filter: { username } } },
+      ])
       .then(function (result) {
         /*
          * This removes the cookie from the client side so the user information is not visibly
@@ -42,12 +56,36 @@ exports.userDelete = function (request, response) {
 
         removeAuthentication(request, response);
 
-        /*
-         * The query has been successfully made!
-         */
-        response
-          .status(200)
-          .send(`User: ${username} has been deleted from this application!`);
+        db.posts
+          .bulkWrite([
+            {
+              updateMany: {
+                filter: { likes: username },
+                update: { $pull: { likes: username } },
+              },
+            },
+            {
+              updateMany: {
+                filter: { "comments.username": username },
+                update: { $pull: { comments: { username } } },
+              },
+            },
+            {
+              deleteMany: {
+                filter: { username },
+              },
+            },
+          ])
+          .then(function (result) {
+            /*
+             * The query has been successfully made!
+             */
+            response
+              .status(200)
+              .send(
+                `User: ${username} has been deleted from this application and all their related posts, comments and likes!`
+              );
+          });
       })
       .catch(function (error) {
         console.log("Error: ", error);
