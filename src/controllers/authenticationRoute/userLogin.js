@@ -53,6 +53,7 @@ exports.userLogin = function (request, response) {
         response.status(200).send({
           username: result.username,
           following: result.following,
+          followers: result.followers,
         });
       }
     })
