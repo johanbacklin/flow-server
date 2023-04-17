@@ -11,11 +11,11 @@ afterAll(async () => {
   await db.disconnect();
 });
 
-describe("deletePost", async () => {
-  test("should return 400 if invalid post id", () => {
+describe("deletePost", () => {
+  test("should return 400 if invalid post id", async () => {
     const response = await request(server)
       .delete("/posts/delete")
-      .send({ id: "hello" });
+      .send({ id: "1" });
 
     expect(response.statusCode).toBe(400);
   });
