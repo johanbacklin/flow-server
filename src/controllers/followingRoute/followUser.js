@@ -2,10 +2,10 @@ const { db } = require("../../database/database");
 const { validateFollow } = require("../validations/validateFollow");
 
 exports.followUser = async function (req, res) {
-  const validatedBody = validateFollow(req.body);
+  const validateUsername = validateFollow(req.body);
 
-  if (validatedBody.error) {
-    res.status(400).send(validatedBody.error.details[0].message);
+  if (validateUsername.error) {
+    res.status(400).send(validatedUsername.error.details[0].message);
     return;
   }
 
@@ -18,25 +18,27 @@ exports.followUser = async function (req, res) {
       username: req.body.username,
     });
 
+    const loggedInUser = req.loggedInUser.username;
+
     if (!userToFollow) {
       return res.status(404).json("User not found");
     }
 
-    if (userToFollow.followers.includes(req.loggedInUser.username)) {
+    if (userToFollow.followers.includes(loggedInUser)) {
       return res.status(403).json("You are already following this user");
     }
 
     const update = [
       {
         updateOne: {
-          filter: { username: req.body.username },
-          update: { $addToSet: { followers: req.loggedInUser.username } },
+          filter: { username: userToFollow },
+          update: { $addToSet: { followers: loggedInUser } },
         },
       },
       {
         updateOne: {
-          filter: { username: req.loggedInUser.username },
-          update: { $addToSet: { following: req.body.username } },
+          filter: { username: loggedInUser },
+          update: { $addToSet: { following: userToFollow } },
         },
       },
     ];
