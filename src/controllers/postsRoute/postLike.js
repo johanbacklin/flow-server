@@ -1,12 +1,12 @@
 const { ObjectId } = require("mongodb");
 const { db } = require("../../database/database");
-const { validateDatabaseID } = require("../validations/validateDatabaseID");
+const { validatePostID } = require("../validations/validatePostID");
 
 exports.postLike = function (request, response) {
   /*
    * This validates that the user does not send in data in the query or body.
    */
-  const validateBody = validateDatabaseID(request.body);
+  const validateBody = validatePostID(request.body);
 
   if (validateBody.error) {
     response.status(400).send(validateBody.error.details[0].message);
@@ -20,7 +20,7 @@ exports.postLike = function (request, response) {
   const { username } = request.loggedInUser;
 
   /*
-   * If the user wants to get a all posts for a certain user, the following query will be made.
+   * If the user wants to like a post, the following query will be made..
    */
   db.posts
     .updateOne(
