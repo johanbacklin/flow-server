@@ -33,7 +33,7 @@ exports.postLikeDelete = function (request, response) {
       if (result.matchedCount === 0) {
         return response
           .status(404)
-          .send(`Cannot find the post username ${username} wants to like!`);
+          .send(`Cannot find the post username ${username} wants to unlike!`);
       }
 
       if (result.matchedCount === 1 && result.modifiedCount === 0) {
