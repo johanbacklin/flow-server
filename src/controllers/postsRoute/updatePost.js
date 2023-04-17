@@ -19,7 +19,7 @@ exports.updatePost = function (req, res) {
     
      db.posts.updateOne({_id : new ObjectId(id), username},{$set:{postText}})
     .then(result=>{
-        if(result.modifiedCount==1){
+        if(result.modifiedCount===1){
         res.status(200).send("Update complete")
         }else{
             throw new Error()
