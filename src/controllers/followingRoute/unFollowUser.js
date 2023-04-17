@@ -2,10 +2,10 @@ const { db } = require("../../database/database");
 const { validateFollow } = require("../validations/validateFollow");
 
 exports.unFollowUser = async function (req, res) {
-  const validatedBody = validateFollow(req.body);
+  const validatedUsername = validateFollow(req.body);
 
-  if (validatedBody.error) {
-    res.status(400).send(validatedBody.error.details[0].message);
+  if (validatedUsername.error) {
+    res.status(400).send(validatedUsername.error.details[0].message);
     return;
   }
 
@@ -18,25 +18,27 @@ exports.unFollowUser = async function (req, res) {
       username: req.body.username,
     });
 
+    const loggedInUser = req.loggedInUser.username;
+
     if (!userToUnfollow) {
       return res.status(404).json("User not found");
     }
 
-    if (!userToUnfollow.followers.includes(req.loggedInUser.username)) {
+    if (!userToUnfollow.followers.includes(loggedInUser)) {
       return res.status(403).json("You are not following this user");
     }
 
     const update = [
       {
         updateOne: {
-          filter: { username: req.body.username },
-          update: { $pull: { followers: req.loggedInUser.username } },
+          filter: { username: userToUnfollow },
+          update: { $pull: { followers: loggedInUser } },
         },
       },
       {
         updateOne: {
-          filter: { username: req.loggedInUser.username },
-          update: { $pull: { following: req.body.username } },
+          filter: { username: loggedInUser },
+          update: { $pull: { following: userToUnfollow } },
         },
       },
     ];
