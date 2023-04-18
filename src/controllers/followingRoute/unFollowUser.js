@@ -8,17 +8,17 @@ exports.unFollowUser = async function (req, res) {
     res.status(400).send(validatedUsername.error.details[0].message);
     return;
   }
+  const loggedInUser = req.loggedInUser.username;
+  const unFollowUsername = req.body.username;
 
-  if (req.body.username === req.loggedInUser.username) {
-    return res.status(400).json("You cannot unfollow yourself");
+  if (unFollowUsername === loggedInUser) {
+    return res.status(400).json("You cannot follow yourself");
   }
 
   try {
     const userToUnfollow = await db.users.findOne({
-      username: req.body.username,
+      username: unFollowUsername,
     });
-
-    const loggedInUser = req.loggedInUser.username;
 
     if (!userToUnfollow) {
       return res.status(404).json("User not found");
@@ -31,14 +31,14 @@ exports.unFollowUser = async function (req, res) {
     const update = [
       {
         updateOne: {
-          filter: { username: userToUnfollow },
+          filter: { username: unFollowUsername },
           update: { $pull: { followers: loggedInUser } },
         },
       },
       {
         updateOne: {
           filter: { username: loggedInUser },
-          update: { $pull: { following: userToUnfollow } },
+          update: { $pull: { following: unFollowUsername } },
         },
       },
     ];
