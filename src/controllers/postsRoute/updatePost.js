@@ -1,22 +1,17 @@
 const { db } = require("../../database/database");
-const { validatePost } = require("../validations/validatePost")
+const { validateChangedPost } = require("../validations/validateChangedPost")
 const {ObjectId}= require("mongodb")
 
 exports.updatePost = function (req, res) {
 
-    const validatedBody = validatePost(req.body)
+    const validatedBody = validateChangedPost(req.body)
     if (validatedBody.error) {
         res.status(400).send(validatedBody.error.details[0].message);
         return;
     }
     const { postText, id } = validatedBody.value;
     const { username } = req.loggedInUser;
-
-    if(!id){
-        res.status(400).send('Please add id for post to edit')
-        return;
-    }
-    
+  
      db.posts.updateOne({_id : new ObjectId(id), username},{$set:{postText}})
     .then(result=>{
         if(result.modifiedCount===1){
