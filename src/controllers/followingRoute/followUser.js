@@ -8,17 +8,17 @@ exports.followUser = async function (req, res) {
     res.status(400).send(validatedUsername.error.details[0].message);
     return;
   }
+  const loggedInUser = req.loggedInUser.username;
+  const followUsername = req.body.username;
 
-  if (req.body.username === req.loggedInUser.username) {
+  if (followUsername === loggedInUser) {
     return res.status(400).json("You cannot follow yourself");
   }
 
   try {
     const userToFollow = await db.users.findOne({
-      username: req.body.username,
+      username: followUsername,
     });
-
-    const loggedInUser = req.loggedInUser.username;
 
     if (!userToFollow) {
       return res.status(404).json("User not found");
@@ -31,14 +31,14 @@ exports.followUser = async function (req, res) {
     const update = [
       {
         updateOne: {
-          filter: { username: userToFollow },
+          filter: { username: followUsername },
           update: { $addToSet: { followers: loggedInUser } },
         },
       },
       {
         updateOne: {
           filter: { username: loggedInUser },
-          update: { $addToSet: { following: userToFollow } },
+          update: { $addToSet: { following: followUsername } },
         },
       },
     ];
