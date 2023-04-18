@@ -1,9 +1,9 @@
 const { db } = require("../../database/database");
-const { validatePost } = require("../validations/validatePost")
+const { validateNewPost } = require("../validations/validateNewPost")
 
 exports.addPost = function (req, res) {
 
-    const validatedBody = validatePost(req.body)
+    const validatedBody = validateNewPost(req.body)
     if (validatedBody.error) {
         response.status(400).send(validatedBody.error.details[0].message);
         return;
