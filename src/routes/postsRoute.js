@@ -8,17 +8,20 @@ const {
 const { postGet } = require("../controllers/postsRoute/postGet");
 const { postLike } = require("../controllers/postsRoute/postLike");
 const { postLikeDelete } = require("../controllers/postsRoute/postLikeDelete");
+const {
+  checkAuthentication,
+} = require("../controllers/middleware/checkAuthentication");
 
 const postsRoute = express.Router();
 
-postsRoute.get("/following", getFollowingPosts);
+postsRoute.get("/following", checkAuthentication, getFollowingPosts);
 
-postsRoute.post("/add", addPost);
+postsRoute.post("/add", checkAuthentication, addPost);
 
 postsRoute.get("/:username", postGet);
 
-postsRoute.post("/like", postLike);
+postsRoute.post("/like", checkAuthentication, postLike);
 
-postsRoute.delete("/like", postLikeDelete);
+postsRoute.delete("/like", checkAuthentication, postLikeDelete);
 
 exports.postsRoute = postsRoute;
