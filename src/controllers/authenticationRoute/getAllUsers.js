@@ -11,7 +11,7 @@ exports.getAllUsers = async function (request, response) {
     }
 
     if (usernames.length === 0) {
-      return response.status(500).json({ error: "No users where found" });
+      return response.status(404).json({ error: "No users where found" });
     }
 
     response
