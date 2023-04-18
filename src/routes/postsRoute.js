@@ -1,4 +1,5 @@
 const express = require("express");
+const { addComment } = require("../controllers/postsRoute/addComment");
 
 //Controllers
 const { addPost } = require("../controllers/postsRoute/addPost");
@@ -16,6 +17,8 @@ postsRoute.get("/following", getFollowingPosts);
 postsRoute.post("/add", addPost);
 
 postsRoute.get("/:username", postGet);
+
+postsRoute.post("/comment", addComment);
 
 postsRoute.post("/like", postLike);
 
