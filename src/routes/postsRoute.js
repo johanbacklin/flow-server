@@ -11,6 +11,7 @@ const { postLikeDelete } = require("../controllers/postsRoute/postLikeDelete");
 const {
   checkAuthentication,
 } = require("../controllers/middleware/checkAuthentication");
+const { updatePost } = require("../controllers/postsRoute/updatePost");
 
 const postsRoute = express.Router();
 
@@ -23,5 +24,6 @@ postsRoute.get("/:username", postGet);
 postsRoute.post("/like", checkAuthentication, postLike);
 
 postsRoute.delete("/like", checkAuthentication, postLikeDelete);
+postsRoute.patch("/", updatePost);
 
 exports.postsRoute = postsRoute;
