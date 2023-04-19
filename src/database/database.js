@@ -31,7 +31,7 @@ class MongoDatabase {
       this.client = await MongoClient.connect(this.url);
       console.log("Successfully connected to the database.");
     } catch (err) {
-      console.log(err);
+      console.log("database.js: 34", err);
     }
 
     this.setupCollections();

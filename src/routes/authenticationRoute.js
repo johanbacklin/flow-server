@@ -4,13 +4,11 @@ const {
 } = require("../controllers/authenticationRoute/userRegister");
 
 const { userLogin } = require("../controllers/authenticationRoute/userLogin");
-
-const {
-  getAllUsers,
-} = require("../controllers/authenticationRoute/getAllUsers");
 const {
   checkAuthentication,
 } = require("../controllers/middleware/checkAuthentication");
+const { userLogout } = require("../controllers/authenticationRoute/userLogout");
+const { userDelete } = require("../controllers/authenticationRoute/userDelete");
 
 const authenticationRoute = express.Router();
 
@@ -24,6 +22,11 @@ authenticationRoute.post("/login", userLogin);
  */
 authenticationRoute.post("/register", userRegister);
 
-authenticationRoute.get("/users", getAllUsers);
+authenticationRoute.post("/logout", checkAuthentication, userLogout);
+
+/*
+ * This route makes it possible for a user to delete themselves from this application.
+ */
+authenticationRoute.delete("/deleteUser", checkAuthentication, userDelete);
 
 exports.authenticationRoute = authenticationRoute;
