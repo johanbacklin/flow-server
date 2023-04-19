@@ -1,6 +1,6 @@
 const request = require("supertest");
-const { db } = require("../../src/database/database")
-const { server } = require("../../src/server/server")
+const { db } = require("../../../src/database/database")
+const { server } = require("../../../src/server/server")
 
 let cookie = undefined
 
@@ -25,7 +25,7 @@ afterAll(async () => {
   }
 })
 
-describe("Testing that add and update post return expected results", () => {
+describe("Testing that add post return expected results", () => {
 
   test("Adds post and recieves status 200 with expected contents when correct body is sent", async () => {
     const resPost = await request(server).post("/posts/add").set('Cookie', cookie).send({ postText: "Solen lyser på test 1" })
@@ -48,5 +48,5 @@ describe("Testing that add and update post return expected results", () => {
     expect(resPost).toHaveProperty("text")
     expect(resPost.text).toBe('"postText" must be a string')
   });
-  1
+  
 });
