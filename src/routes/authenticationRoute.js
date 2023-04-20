@@ -7,7 +7,7 @@ const { userLogin } = require("../controllers/authenticationRoute/userLogin");
 
 const {
   getAllUsers,
-} = require("../controllers/authenticationRoute/getAllUsers");
+} = require("../controllers/usersRoute/getAllUsers");
 const {
   checkAuthentication,
 } = require("../controllers/middleware/checkAuthentication");
