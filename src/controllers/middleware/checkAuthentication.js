@@ -8,6 +8,7 @@ exports.checkAuthentication = function (request, response, next) {
   const authenticationToken = request.cookies.authenticationToken;
   try {
     const loggedInUser = jwt.verify(authenticationToken, secret);
+
     request.loggedInUser = loggedInUser;
     next();
   } catch (error) {
