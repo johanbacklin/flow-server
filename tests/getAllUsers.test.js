@@ -11,11 +11,10 @@ afterAll(async () => {
 });
 
 describe("getAllUsers", () => {
-  test("returns a array with a property of usernames and 200 as status", async () => {
-    const response = await request(server).get("/authentication/users");
-    expect(response.body).toHaveProperty("usernames");
-    expect(Array.isArray(response.body.usernames)).toBe(true);
-
+  test("returns an array with a property of users and 200 as status", async () => {
+    const response = await request(server).get("/users/allUsers");
+    expect(response.body).toHaveProperty("users");
+    expect(Array.isArray(response.body.users)).toBe(true);
     expect(response.status).toBe(200);
   });
 });
