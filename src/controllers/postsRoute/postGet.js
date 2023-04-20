@@ -37,7 +37,7 @@ exports.postGet = async function (request, response) {
       if (result.length === 0) {
         return response
           .status(404)
-          .send(`${username}, have not posted anything yet!`);
+          .send(`No posts found for username ${username}!`);
       }
 
       /*
