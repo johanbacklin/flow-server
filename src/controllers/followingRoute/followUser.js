@@ -5,7 +5,7 @@ exports.followUser = async function (req, res) {
   const validateUsername = validateFollow(req.body);
 
   if (validateUsername.error) {
-    res.status(400).send(validatedUsername.error.details[0].message);
+    res.status(400).send(validateUsername.error.details[0].message);
     return;
   }
   const loggedInUser = req.loggedInUser.username;
