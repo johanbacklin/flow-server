@@ -19,18 +19,17 @@ describe("Testing unfollowUser endpoint", () => {
         password: "testingAccount",
       });
     const cookie = logInResponse.header["set-cookie"].pop();
-
     await request(server)
       .post("/following/follow")
       .send({ username: "Mika" })
       .set("Cookie", cookie);
 
-    const response = await request(server)
+    const responseUnFollow = await request(server)
       .delete("/following/unFollow")
       .send({ username: "Mika" })
       .set("Cookie", cookie);
 
-    expect(response.status).toBe(200);
+    expect(responseUnFollow.status).toBe(200);
   });
 
   test("DELETE /following/unFollow should return 400 if user tries to unfollow themselves", async () => {
