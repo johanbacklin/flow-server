@@ -24,6 +24,7 @@ postsRoute.get("/:username", postGet);
 postsRoute.post("/like", checkAuthentication, postLike);
 
 postsRoute.delete("/like", checkAuthentication, postLikeDelete);
+
 postsRoute.patch("/", updatePost);
 
 exports.postsRoute = postsRoute;

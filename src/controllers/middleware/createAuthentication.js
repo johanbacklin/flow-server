@@ -12,7 +12,7 @@ exports.createAuthentication = function (response, userCopy) {
   response.cookie("authenticationToken", authenticationToken, {
     maxAge: 600000,
     sameSite: "none",
-    // secure: true,
+    secure: true,
     httpOnly: true,
   });
 };

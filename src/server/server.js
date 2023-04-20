@@ -18,7 +18,7 @@ server.use(cookieParser());
 
 server.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -26,7 +26,5 @@ server.use(
 server.use("/authentication", authenticationRoute);
 server.use("/posts", postsRoute);
 server.use("/following", checkAuthentication, followingRoute);
-
-server.use("/posts", checkAuthentication, postsRoute);
 
 exports.server = server;
