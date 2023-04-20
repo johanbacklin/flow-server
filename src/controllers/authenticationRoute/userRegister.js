@@ -29,6 +29,7 @@ exports.userRegister = function (request, response) {
     username,
     password: securePassword,
     following: [],
+    followers: [],
   };
 
   /*
