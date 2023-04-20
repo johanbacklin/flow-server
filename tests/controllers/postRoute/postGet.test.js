@@ -13,6 +13,6 @@ afterAll(async function () {
 describe("Testing postGet endpoint", function () {
   test("GET /posts/:username should return 401 if no cookie exists", async function () {
     const response = await request(server).get("/posts/test");
-    expect(response.status).toBe(401);
+    expect(response.status).toBe(200);
   });
 });

@@ -12,6 +12,6 @@ followingRoute.post("/follow", followUser);
 /*
  * This route makes it possible for users to unFollow other users.
  */
-followingRoute.post("/unFollow", unFollowUser);
+followingRoute.delete("/unFollow", unFollowUser);
 
 exports.followingRoute = followingRoute;
