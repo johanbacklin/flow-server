@@ -26,11 +26,6 @@ describe("Testing followUser endpoint", () => {
       .set("Cookie", cookie);
 
     expect(response.status).toBe(200);
-
-    await request(server)
-      .delete("/following/unFollow")
-      .send({ username: "Mika" })
-      .set("Cookie", cookie);
   });
 
   test("POST /following/follow should return 400 if user tries to follow themselves", async () => {
