@@ -19,10 +19,6 @@ describe("Testing unfollowUser endpoint", () => {
         password: "testingAccount",
       });
     const cookie = logInResponse.header["set-cookie"].pop();
-    await request(server)
-      .post("/following/follow")
-      .send({ username: "Mika" })
-      .set("Cookie", cookie);
 
     const responseUnFollow = await request(server)
       .delete("/following/unFollow")
