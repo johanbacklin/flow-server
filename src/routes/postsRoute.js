@@ -1,7 +1,9 @@
 const express = require("express");
 
+
 //Controllers
 const { addPost } = require("../controllers/postsRoute/addPost");
+const { deletePost } = require("../controllers/postsRoute/deletePost");
 const {
   getFollowingPosts,
 } = require("../controllers/postsRoute/getFollowingPosts");
@@ -21,10 +23,13 @@ postsRoute.post("/add", checkAuthentication, addPost);
 
 postsRoute.get("/:username", postGet);
 
+postsRoute.delete("/delete", deletePost);
+
 postsRoute.post("/like", checkAuthentication, postLike);
 
 postsRoute.delete("/like", checkAuthentication, postLikeDelete);
 
 postsRoute.patch("/", updatePost);
+
 
 exports.postsRoute = postsRoute;
