@@ -3,25 +3,36 @@ const { addComment } = require("../controllers/postsRoute/addComment");
 
 //Controllers
 const { addPost } = require("../controllers/postsRoute/addPost");
+const { deletePost } = require("../controllers/postsRoute/deletePost");
 const {
   getFollowingPosts,
 } = require("../controllers/postsRoute/getFollowingPosts");
 const { postGet } = require("../controllers/postsRoute/postGet");
 const { postLike } = require("../controllers/postsRoute/postLike");
 const { postLikeDelete } = require("../controllers/postsRoute/postLikeDelete");
+const {
+  checkAuthentication,
+} = require("../controllers/middleware/checkAuthentication");
+const { updatePost } = require("../controllers/postsRoute/updatePost");
 
 const postsRoute = express.Router();
 
-postsRoute.get("/following", getFollowingPosts);
+postsRoute.get("/following", checkAuthentication, getFollowingPosts);
 
-postsRoute.post("/add", addPost);
+postsRoute.post("/add", checkAuthentication, addPost);
 
 postsRoute.get("/:username", postGet);
 
+
 postsRoute.post("/comment", addComment);
 
-postsRoute.post("/like", postLike);
+postsRoute.delete("/delete", checkAuthentication, deletePost);
 
-postsRoute.delete("/like", postLikeDelete);
+postsRoute.post("/like", checkAuthentication, postLike);
+
+postsRoute.delete("/like", checkAuthentication, postLikeDelete);
+
+postsRoute.patch("/",checkAuthentication, updatePost);
+
 
 exports.postsRoute = postsRoute;
