@@ -23,16 +23,13 @@ postsRoute.post("/add", checkAuthentication, addPost);
 
 postsRoute.get("/:username", postGet);
 
-
 postsRoute.post("/comment", addComment);
 
+postsRoute.post("/like", postLike);
 postsRoute.delete("/delete", checkAuthentication, deletePost);
 
 postsRoute.post("/like", checkAuthentication, postLike);
 
 postsRoute.delete("/like", checkAuthentication, postLikeDelete);
-
 postsRoute.patch("/",checkAuthentication, updatePost);
-
-
 exports.postsRoute = postsRoute;
