@@ -1,6 +1,6 @@
 const request = require("supertest");
-const { db } = require("../src/database/database");
-const { server } = require("../src/server/server");
+const { db } = require("../../../src/database/database");
+const { server } = require("../../../src/server/server");
 
 beforeAll(async () => {
   await db.connect();
@@ -15,8 +15,8 @@ describe("deletePost", () => {
     const loginResponse = await request(server)
       .post("/authentication/login")
       .send({
-        username: "andreas",
-        password: "andreas",
+        username: "test",
+        password: "testingAccount",
       });
 
     const cookie = loginResponse.header["set-cookie"].pop();

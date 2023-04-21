@@ -1,6 +1,6 @@
 const request = require("supertest");
-const { db } = require("../src/database/database");
-const { server } = require("../src/server/server");
+const { db } = require("../../../src/database/database");
+const { server } = require("../../../src/server/server");
 
 beforeAll(async () => {
   await db.connect();
