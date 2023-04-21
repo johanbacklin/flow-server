@@ -21,7 +21,7 @@ describe("Testing postGet endpoint", function () {
   });
 
   test("GET /posts/:username should return 200 if successful get", async function () {
-    const response = await request(server).get("/posts/test");
+    const response = await request(server).get("/posts/David");
     expect(response.status).toBe(200);
   });
 });
