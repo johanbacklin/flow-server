@@ -6,6 +6,7 @@ let cookie = null;
 
 beforeAll(async function () {
   await db.connect();
+
   await request(server)
     .post("/authentication/register")
     .send({ username: "Brownie", password: "Chocolate" });
@@ -27,6 +28,7 @@ describe("Testing userLogin endpoint", function () {
       .send({});
     expect(response.status).toBe(400);
   });
+
   test("POST /authentication/login should return 404 if username does not exist", async function () {
     const response = await request(server)
       .post("/authentication/login")
