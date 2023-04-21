@@ -7,6 +7,9 @@ const {
   getFollowingPosts,
 } = require("../controllers/postsRoute/getFollowingPosts");
 const { postGet } = require("../controllers/postsRoute/postGet");
+const {
+  checkAuthentication,
+} = require("../controllers/middleware/checkAuthentication");
 
 const postsRoute = express.Router();
 
