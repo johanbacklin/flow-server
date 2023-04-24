@@ -23,7 +23,7 @@ postsRoute.post("/add", checkAuthentication, addPost);
 
 postsRoute.get("/:username", postGet);
 
-postsRoute.post("/comment", addComment);
+postsRoute.post("/comment", checkAuthentication, addComment);
 
 postsRoute.delete("/delete", checkAuthentication, deletePost);
 
