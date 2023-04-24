@@ -27,6 +27,11 @@ exports.addComment = async function (request, response) {
       }
     );
 
+    if (result.matchedCount === 0) {
+      response.status(404).json({ error: "Post not found" });
+      return;
+    }
+
     response.status(200).json(result);
   } catch (error) {
     response
