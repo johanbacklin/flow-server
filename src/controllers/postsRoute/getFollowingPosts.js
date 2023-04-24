@@ -26,7 +26,6 @@ exports.getFollowingPosts = async function (request, response) {
         creation: { $gt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000) }, //retrieve only recent posts that are no older than 5 days
       })
       .sort({ creation: -1 }) // sort by createdAt in descending order
-      .limit(10)
       .toArray();
 
     if (posts.length === 0) {
