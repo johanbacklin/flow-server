@@ -6,11 +6,11 @@ const secret = process.env.SECRET;
  */
 exports.createAuthentication = function (response, userCopy) {
   const authenticationToken = jwt.sign(userCopy, secret, {
-    expiresIn: 600,
+    expiresIn: 1800,
   });
 
   response.cookie("authenticationToken", authenticationToken, {
-    maxAge: 600000,
+    maxAge: 1800000,
     sameSite: "none",
     secure: true,
     httpOnly: true,
