@@ -1,13 +1,30 @@
 const request = require("supertest");
+let cookie = undefined;
+
 const { db } = require("../../../src/database/database");
 const { server } = require("../../../src/server/server");
 
 beforeAll(async () => {
   await db.connect();
+  const resReg = await request(server)
+    .post("/authentication/register")
+    .send({ username: "TestDelete", password: "TestDelete" });
+  if (resReg.status == 201) {
+    const resLog = await request(server)
+      .post("/authentication/login")
+      .send({ username: "TestDelete", password: "TestDelete" });
+    cookie = resLog.header["set-cookie"];
+  }
 });
 
 afterAll(async () => {
-  await db.disconnect();
+  try {
+    await db.posts.deleteMany({ username: "TestDelete" });
+    await db.users.deleteOne({ username: "TestDelete" });
+  } catch (error) {
+  } finally {
+    await db.disconnect();
+  }
 });
 
 describe("deletePost", () => {
