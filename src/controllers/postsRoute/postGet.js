@@ -32,6 +32,7 @@ exports.postGet = async function (request, response) {
    */
   db.posts
     .find({ username })
+    .sort({ creation: -1 })
     .toArray()
     .then(async function (result) {
       if (result.length === 0) {
